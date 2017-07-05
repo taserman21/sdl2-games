@@ -1,4 +1,4 @@
-#include "TEXTURE.cpp"
+#include "TEXTURE.hpp"
 
 std::string srfile = "stingray.png";
 
