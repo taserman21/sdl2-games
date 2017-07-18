@@ -1,108 +1,49 @@
-// TEXTURE_CPP \\
+// TEXTURE_HPP \\
 
 #include <SDL2/SDL.h>
-
 #include <SDL2/SDL_image.h>
 
 #include <string>
 
-// Class Texture for rendering Textures \\
-
-using namespace std;
-
 class sTexture
 {
-    public:
-    
-    sTexture(int, int, int, int, string);
-    
-    ~sTexture();
-    
-    int renderTexture(SDL_Window*);
-    
-    int loadFile();
-    
     private:
     
-    SDL_Renderer* sTexture_Renderer = NULL;
+// Variable that will hold value for the texture's x, y position, width, height. \\
+ 
+    int texX;
+    int texY;
+    int texW;
+    int texH;
     
-    SDL_Surface*  sTexture_Surface  = NULL;
+    SDL_Renderer* stREND;
+    SDL_Surface*  stSURF;
+    SDL_Texture*  stTEXT;
     
-    SDL_Texture*  sTexture_Texture  = NULL;
+    public:
     
-    SDL_Rect*     sTexture_SRect    = NULL;
+// Sets image specifications based on corresponding values seen above. \\
+
+    int setSpec(int, int, int, int);
     
-    SDL_Rect*     sTexture_DRect    = NULL;
+// Function to prep texture with x, y, w, and h values. \\
     
-                                // Texture Width    \\
+    int prep(SDL_Window*);
+
+
+// Bool to evaluate whether the texture has been prepped or not by the prep \\
+// function.                                                                 \\                                                            
+
+    bool isPrepped;
+
+// Function to draw image to screen. \\
     
-    int           sTextureWidth     = 0;
+    int drawImage(std::string);
     
-                                // Texture Height    \\
+    int stCLOSE();
     
-    int           sTextureHeight    = 0;
-    
-                                // Texture X Position \\
-    
-                  int sTextureXPos  = 0;
-    
-                                // Texture Y Position \\
-    
-                  int sTextureYPos  = 0;
-    
-                                // Texture Image File \\
-    
-    string        sTextureFile      = 0;
+    sTexture();
+    ~sTexture();
 };
-
-sTexture::sTexture(int W, int H, int X, int Y, string F)
-{
-    sTextureWidth  = W;
     
-    sTextureHeight = H;
     
-    sTextureXPos   = X;
-    
-    sTextureYPos   = Y;
-    
-    sTextureFile   = F;
-    
-    sTexture_SRect->w = W;
-    
-    sTexture_SRect->h = H;
-    
-    sTexture_SRect->x = X;
-    
-    sTexture_SRect->y = Y;
-    
-    sTexture_DRect->w = W;
-    
-    sTexture_DRect->h = H;
-    
-    sTexture_DRect->x = X;
-    
-    sTexture_DRect->y = Y;
-}
-
-int sTexture::loadFile()
-{
-    sTexture_Surface = IMG_Load(sTextureFile.c_str());
-}
-
-int sTexture::renderTexture(SDL_Window* window)
-{
-    sTexture_Renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-    
-    loadFile();
-    
-    sTexture_Texture  = SDL_CreateTextureFromSurface(sTexture_Renderer, sTexture_Surface);
-    
-    SDL_RenderCopy(sTexture_Renderer, sTexture_Texture, sTexture_SRect, sTexture_DRect);
-    
-    SDL_RenderPresent(sTexture_Renderer);
-}
-
-sTexture::~sTexture()
-{
-}
-
