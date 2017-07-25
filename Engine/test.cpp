@@ -1,10 +1,6 @@
-#include "src/INCLUDE.hpp"
-#include <iostream>
+#include "test.hpp"
 
-void kA()
-{
-    std::cout << "You Pressed A!" << std::endl;
-}
+#include "src/INCLUDE.hpp"
 
 int main(int argc, char *args[])
 {   
@@ -21,6 +17,8 @@ int main(int argc, char *args[])
     text.prep(window);
     
     text.drawImage("stingray.png");
+    
+    tEvent.kB.setFunc(sayHi);
     
     tEvent.eventRun();
     

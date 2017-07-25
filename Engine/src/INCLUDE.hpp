@@ -7,5 +7,6 @@
 #include "TEXTURE.cpp"
 #include "EVENT.cpp"
 #include "SDL.hpp"
+#include "TYPES.hpp"
 
 #endif
